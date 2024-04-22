@@ -15,9 +15,9 @@ export const synchronizeAllEmployees = task({
     );
 
     const promises = batchedEmployees.map(async (batch) => {
-      return await synchronizeEmployeeTask.batchTrigger({
-        items: batch.map((employeeId) => ({ payload: { employeeId } })),
-      });
+      return await synchronizeEmployeeTask.batchTrigger(
+        batch.map((employeeId) => ({ payload: { employeeId } })),
+      );
     });
 
     const batchHandles = await Promise.all(promises);
